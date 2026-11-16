@@ -2,7 +2,7 @@
 
 A benchmark for **robot reward / progress models on real robot executions**,
 labelled with how far the *task state* has progressed, not how much time has
-passed. It is released together with the RewardBox toolbox (RRM-Hub).
+passed. It is released together with the [RewardBox](https://github.com/showlab/RewardBox) toolbox (RRM-Hub).
 
 - **1,117 single-view videos** (plus 205 synchronized three-camera inputs) from
   **425 clips** of **198 real-robot policy executions** across 52 tasks on five
