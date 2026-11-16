@@ -172,8 +172,7 @@ metrics.paired_accuracy(preferred_scores, nonpreferred_scores)
 
 Every registered model can be evaluated on RRM-Bench-1K, the benchmark of the
 paper. It tests whether an evaluator follows the *task state* of a real robot
-execution rather than elapsed time: 1,117 single-view videos (plus 205
-three-camera inputs) of real-robot executions across 52 tasks with task-state
+execution rather than elapsed time: 1,117 real-robot videos across 52 tasks with task-state
 progress labels, scored on the direction of 1 FPS transitions (Rising / Falling
 F1) and on trajectory ranking (VOC, Kendall τ_a). Four contrast suites locate
 where an evaluator fails: (A) Action–Effect, (B) Semantic/Ordered Constraint,
