@@ -1,0 +1,78 @@
+{
+  "model": "roboreward-4b",
+  "video": "calibration/synthetic_pick.mp4",
+  "instruction": "move the red block onto the green target",
+  "sampling": {
+    "num_frames": 6,
+    "strategy": "uniform",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "uniform:n=6:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.57.1"
+  },
+  "output": {
+    "model": "roboreward-4b",
+    "normalize": "none",
+    "progress": [
+      0.0,
+      0.0,
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "frame_indices": [
+      0,
+      8,
+      16,
+      23,
+      31,
+      39
+    ],
+    "weights": null,
+    "success": null,
+    "raw": {
+      "discrete_scores": [
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "responses": [
+        "ANSWER: 1",
+        "ANSWER: 1",
+        "ANSWER: 2",
+        "ANSWER: 2",
+        "ANSWER: 2",
+        "ANSWER: 2"
+      ],
+      "parse_failures": []
+    },
+    "cost": {
+      "latency_s": 12.440023941999243,
+      "n_calls": 0,
+      "peak_vram_gb": 9.084937728
+    },
+    "meta": {
+      "adapter_calls_official": false,
+      "implemented_from": "model card (no official code)",
+      "mode": "prefix",
+      "extension_notice": "The model card defines an end-of-episode score; mode='prefix' (one call per prefix) is a RewardBox extension, not prescribed by the model card",
+      "n_parse_failures": 0,
+      "video_fps": 1.0,
+      "image_patch_size": 16,
+      "n_backend_calls": 6,
+      "upstream": "(no official code) model card: https://huggingface.co/teetone/RoboReward-4B",
+      "weights": "teetone/RoboReward-4B"
+    }
+  }
+}

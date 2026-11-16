@@ -1,0 +1,177 @@
+{
+  "model": "sole-r1-8b",
+  "video": "calibration/synthetic_pick.mp4",
+  "instruction": "move the red block onto the green target",
+  "sampling": {
+    "num_frames": 16,
+    "strategy": "fps",
+    "fps": 1.0,
+    "interval": null,
+    "resize": null,
+    "include_last": false,
+    "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+  },
+  "model_opts": {
+    "temperature": 0.0,
+    "timeout_ms": 120000,
+    "server_provenance_file": "calibration/records/server_provenance/sole-r1-8b.json"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.57.1"
+  },
+  "recorded_at_utc": "2026-08-03T09:49:30Z",
+  "repeatability_observation": {
+    "temperature": 0.0,
+    "observed_progress": [
+      [
+        0.0,
+        5.0,
+        9.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ]
+    ],
+    "regression_atol": 1.0,
+    "claim": "Observed integer-output jitter only; cause not established."
+  },
+  "output": {
+    "model": "sole-r1-8b",
+    "normalize": "none",
+    "progress": [
+      0.0,
+      5.0,
+      8.0,
+      13.0
+    ],
+    "frame_indices": [
+      0,
+      10,
+      20,
+      30
+    ],
+    "weights": null,
+    "success": null,
+    "raw": {
+      "official_valid_answers": [
+        0.0,
+        5.0,
+        8.0,
+        13.0
+      ],
+      "text_outputs": [
+        "<think>In the previous timestep, the red block sits on the right side of the workspace and the green target is on the left, with a clear gap between them. In the current timestep, the red block appears slightly shifted leftward toward the green target while the target remains stationary; there is still no contact or alignment over the target. Given the previous progress of 0%, this small reduction in distance suggests a minor but positive advance, so I would predict the next task progress to be low, around 5%.</think><answer>5%</answer>",
+        "<think>In the previous timestep, the red block sits to the right of the green target with a clear gap between them. In the current timestep, the red block appears slightly closer to the green target (a small leftward shift), while the target itself remains stationary. This reduced distance indicates incremental progress toward placing the red block onto the green target, but there is still no contact or alignment over the target. Given a previous progress of 5%, a small approach like this suggests a modest increase; I would predict the current progress to be about 8%.</think><answer>8%</answer>",
+        "<think>In the previous timestep, the red block sits to the right of the green target with a clear gap between them. In the current timestep, the red block appears slightly closer to the green target (a small leftward shift), while the target itself remains stationary. This reduced distance indicates incremental progress toward placing the red block onto the green target, but there is still no contact or alignment over the target. Given a previous progress of 8%, a small approach like this suggests a modest increase; I would predict the current progress to be around 12-14% (approximately 13%).</think><answer>13%</answer>"
+      ],
+      "text_inputs": [
+        "<|im_start|>system\nYou are an expert roboticist with the goal of predicting task progress percentages given frames from a video of a robot attempting to complete a task. You first think, in the form of an internal monologue, before providing your final answer. Your reasoning process MUST BE enclosed within <think> </think> tags and should include detailed reasoning. Your final answer MUST BE enclosed within <answer> </answer> tags and should be a integer (positive or negative) representing current task progress percentage. Example output format: <think>[detailed reasoning process]</think><answer>[current task progress]%</answer><|im_end|>\n<|im_start|>user\n<|vision_start|><|image_pad|><|vision_end|>Here is an image containing multiple camera views of a robot attempting to complete a task. The views from the very first timestep are shown to the left. The views from the previous timestep are shown in the middle. The views from the current timestep are shown to the right. The task description is: move the red block onto the green target. The task progress for the very first timestep is 0%. The task progress for the previous timestep is 0%. Predict the task progress for the current timestep.<|im_end|>\n<|im_start|>assistant\n",
+        "<|im_start|>system\nYou are an expert roboticist with the goal of predicting task progress percentages given frames from a video of a robot attempting to complete a task. You first think, in the form of an internal monologue, before providing your final answer. Your reasoning process MUST BE enclosed within <think> </think> tags and should include detailed reasoning. Your final answer MUST BE enclosed within <answer> </answer> tags and should be a integer (positive or negative) representing current task progress percentage. Example output format: <think>[detailed reasoning process]</think><answer>[current task progress]%</answer><|im_end|>\n<|im_start|>user\n<|vision_start|><|image_pad|><|vision_end|>Here is an image containing multiple camera views of a robot attempting to complete a task. The views from the very first timestep are shown to the left. The views from the previous timestep are shown in the middle. The views from the current timestep are shown to the right. The task description is: move the red block onto the green target. The task progress for the very first timestep is 0%. The task progress for the previous timestep is 5%. Predict the task progress for the current timestep.<|im_end|>\n<|im_start|>assistant\n",
+        "<|im_start|>system\nYou are an expert roboticist with the goal of predicting task progress percentages given frames from a video of a robot attempting to complete a task. You first think, in the form of an internal monologue, before providing your final answer. Your reasoning process MUST BE enclosed within <think> </think> tags and should include detailed reasoning. Your final answer MUST BE enclosed within <answer> </answer> tags and should be a integer (positive or negative) representing current task progress percentage. Example output format: <think>[detailed reasoning process]</think><answer>[current task progress]%</answer><|im_end|>\n<|im_start|>user\n<|vision_start|><|image_pad|><|vision_end|>Here is an image containing multiple camera views of a robot attempting to complete a task. The views from the very first timestep are shown to the left. The views from the previous timestep are shown in the middle. The views from the current timestep are shown to the right. The task description is: move the red block onto the green target. The task progress for the very first timestep is 0%. The task progress for the previous timestep is 8%. Predict the task progress for the current timestep.<|im_end|>\n<|im_start|>assistant\n"
+      ]
+    },
+    "cost": {
+      "latency_s": 3.4453447769628838,
+      "n_calls": 3,
+      "peak_vram_gb": 0.0
+    },
+    "meta": {
+      "adapter_calls_official": true,
+      "protocol": "official_reward_server_zmq",
+      "upstream_commit": "2a1286b205577a38a2ef5d9d13efa76878485f87",
+      "service_endpoint": "localhost:8001",
+      "service_name": "rewards",
+      "server_checkpoint_provenance": {
+        "schema_version": 1,
+        "kind": "client-declared standalone server provenance",
+        "recorded_at_utc": "2026-08-03T09:40:13Z",
+        "upstream": {
+          "commit": "2a1286b205577a38a2ef5d9d13efa76878485f87"
+        },
+        "checkpoint": {
+          "repo": "Philip-MIT/SOLE-R1-8B",
+          "revision": "4b322fbbff3a6b9815fc13b70803cdcb8884616b",
+          "runtime_layout": "mutable config copies plus absolute safetensor symlinks to immutable HF blobs"
+        },
+        "base_processor": {
+          "repo": "Qwen/Qwen3-VL-8B-Instruct",
+          "cached_snapshot_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+        },
+        "runtime": {
+          "python": "3.10.20",
+          "torch": "2.9.0",
+          "vllm": "0.12.0",
+          "transformers": "4.57.3",
+          "trl": "0.23.0",
+          "qwen_vl_utils": "0.0.14",
+          "gpu": "NVIDIA H200 NVL",
+          "cuda_visible_devices": "5",
+          "gpu_memory_utilization": 0.4,
+          "model_weights_gib_reported_by_vllm": 16.9683,
+          "kv_cache_gib_reported_by_vllm": 27.93
+        },
+        "service": {
+          "endpoint": "localhost:8001",
+          "interface": "rewards",
+          "probe_result": "ready"
+        },
+        "launcher": "scripts/run_sole_r1_server.py",
+        "note": "This is the frozen client-side evidence record from the calibration run; Agentlace does not provide remote attestation."
+      },
+      "server_provenance_file": "calibration/records/server_provenance/sole-r1-8b.json",
+      "paper_equivalence": "official server route; numeric paper equivalence not yet calibrated",
+      "official_args": {
+        "temperature": 0.0,
+        "from_zero": false,
+        "external_only": true
+      },
+      "front_view": "primary",
+      "wrist_view": null,
+      "ignored_views": [],
+      "progress_scale": "raw integer percentage [-100, 100]",
+      "normalized": false,
+      "first_timestep": "official fixed zero baseline",
+      "n_transport_calls": 1,
+      "n_backend_calls": 3,
+      "upstream": "sole-r1-model/reward_client/utils.py:InferenceClient.call -> sole-r1-model/reward_server/src/reward_server/main.py:callback",
+      "weights": "Philip-MIT/SOLE-R1-8B"
+    }
+  }
+}

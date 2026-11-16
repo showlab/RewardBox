@@ -1,0 +1,12 @@
+Task instruction:
+<task_instruction>
+$task_instruction
+</task_instruction>
+
+You will receive $n_observations observations in chronological order, indexed from 0. Images under the same observation index are simultaneous views, not additional time steps.
+
+Estimate absolute physical task completion for every observation on a consistent scale from 0 to 100. Zero means no achieved task progress; 100 means that all requirements of the task are satisfied. Use intermediate values for partial completion.
+
+Base the scores on task-relevant physical states and the available temporal context. An achieved state that is undone can reduce the score. Unchanged states can receive equal scores. Do not force monotonic increases, do not force the first observation to 0, and do not force the last observation to 100. A clip can begin during an ongoing task and can end in failure. Elapsed time and robot motion alone do not establish completion.
+
+Return a JSON object with exactly one key, "progress". Its value must be an array of exactly $n_observations finite numbers in [0, 100], in the supplied observation order. Return no Markdown or explanation.

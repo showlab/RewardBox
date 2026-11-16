@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "client-declared standalone server provenance",
+  "recorded_at_utc": "2026-08-03T09:40:13Z",
+  "upstream": {
+    "commit": "2a1286b205577a38a2ef5d9d13efa76878485f87"
+  },
+  "checkpoint": {
+    "repo": "Philip-MIT/SOLE-R1-8B",
+    "revision": "4b322fbbff3a6b9815fc13b70803cdcb8884616b",
+    "runtime_layout": "mutable config copies plus absolute safetensor symlinks to immutable HF blobs"
+  },
+  "base_processor": {
+    "repo": "Qwen/Qwen3-VL-8B-Instruct",
+    "cached_snapshot_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+  },
+  "runtime": {
+    "python": "3.10.20",
+    "torch": "2.9.0",
+    "vllm": "0.12.0",
+    "transformers": "4.57.3",
+    "trl": "0.23.0",
+    "qwen_vl_utils": "0.0.14",
+    "gpu": "NVIDIA H200 NVL",
+    "cuda_visible_devices": "5",
+    "gpu_memory_utilization": 0.4,
+    "model_weights_gib_reported_by_vllm": 16.9683,
+    "kv_cache_gib_reported_by_vllm": 27.93
+  },
+  "service": {
+    "endpoint": "localhost:8001",
+    "interface": "rewards",
+    "probe_result": "ready"
+  },
+  "launcher": "scripts/run_sole_r1_server.py",
+  "note": "This is the frozen client-side evidence record from the calibration run; Agentlace does not provide remote attestation."
+}

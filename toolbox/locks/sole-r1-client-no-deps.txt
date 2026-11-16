@@ -1,0 +1,9 @@
+# Safe additive overlay for the RewardBox shared environment.
+#
+# IMPORTANT: install this file with --no-deps.  Agentlace's published
+# dependency metadata currently pulls opencv-python, gym, typing, and the
+# placeholder `zmq` distribution.  RewardBox already has the compatible
+# headless cv2/numpy/pyzmq stack; resolving those transitive dependencies would
+# place two cv2-owning distributions in the same environment.
+lz4==4.4.5
+agentlace @ git+https://github.com/youliangtan/agentlace.git@cf2c337c5e3694cdbfc14831b239bd657bc4894d

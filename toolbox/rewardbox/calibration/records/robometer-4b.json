@@ -1,0 +1,77 @@
+{
+  "model": "robometer-4b",
+  "video": "calibration/synthetic_pick.mp4",
+  "instruction": "move the red block onto the green target",
+  "sampling": {
+    "num_frames": 8,
+    "strategy": "uniform",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.57.1"
+  },
+  "output": {
+    "model": "robometer-4b",
+    "normalize": "none",
+    "progress": [
+      0.07456004619598389,
+      0.14570702612400055,
+      0.20347101986408234,
+      0.22905005514621735,
+      0.2739414572715759,
+      0.26995617151260376,
+      0.2821909189224243,
+      0.8521763682365417
+    ],
+    "frame_indices": [
+      0,
+      6,
+      11,
+      17,
+      22,
+      28,
+      33,
+      39
+    ],
+    "weights": null,
+    "success": [
+      0.00186920166015625,
+      0.0010986328125,
+      0.0008544921875,
+      0.0007781982421875,
+      0.000804901123046875,
+      0.00096893310546875,
+      0.0013275146484375,
+      0.74609375
+    ],
+    "raw": {
+      "native_length": 8,
+      "is_discrete": true,
+      "num_bins": 10,
+      "autocast_dtype": "torch.bfloat16",
+      "attn_implementation": "flash_attention_2"
+    },
+    "cost": {
+      "latency_s": 20.877834732003976,
+      "n_calls": 1,
+      "peak_vram_gb": 9.240224256
+    },
+    "meta": {
+      "adapter_calls_official": true,
+      "model_path": "aliangdw/Robometer-4B",
+      "resampled_to_sampling_grid": false,
+      "unsloth_loaded": true,
+      "autocast_dtype": "torch.bfloat16",
+      "n_backend_calls": 1,
+      "upstream": "robometer.evals.eval_server:compute_batch_outputs",
+      "weights": "aliangdw/Robometer-4B"
+    }
+  }
+}

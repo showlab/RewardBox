@@ -1,0 +1,95 @@
+{
+ "name": "RRM-Bench-1K",
+ "version": "1.0",
+ "source_package": "robochallenge_final_20261014",
+ "category_labels": "rc-final-20261014+ae-exec-v1 (Action-Effect assigned per execution, 2026-11-03)",
+ "created": "2026-10-14",
+ "label": "task-state progress curve (state_v2), one per clip",
+ "counts": {
+  "tasks": 52,
+  "task_names": 49,
+  "clips": 425,
+  "single_view_cases": 1117,
+  "multiview_cases": 205,
+  "episodes": 198,
+  "frames": 592640,
+  "conditions": {
+   "main": 201,
+   "object_split": 33,
+   "unit_split": 107,
+   "unit_window": 84
+  }
+ },
+ "categories": {
+  "action_effect": {
+   "videos": 159,
+   "videos_pct": 14.2,
+   "frames": 65181,
+   "frames_pct": 11.0,
+   "clips": 55,
+   "episodes": 48,
+   "scored_videos": 86
+  },
+  "persistence_reversal": {
+   "videos": 467,
+   "videos_pct": 41.8,
+   "frames": 292021,
+   "frames_pct": 49.3,
+   "clips": 185,
+   "episodes": 59
+  },
+  "semantic_ordered": {
+   "videos": 290,
+   "videos_pct": 26.0,
+   "frames": 130959,
+   "frames_pct": 22.1,
+   "clips": 98,
+   "episodes": 59
+  },
+  "occlusion_viewpoint": {
+   "videos": 394,
+   "videos_pct": 35.3,
+   "frames": 237393,
+   "frames_pct": 40.1,
+   "clips": 297,
+   "episodes": 159
+  },
+  "control": {
+   "videos": 182,
+   "videos_pct": 16.3,
+   "frames": 92652,
+   "frames_pct": 15.6,
+   "clips": 78,
+   "episodes": 28
+  },
+  "no_task_view": {
+   "videos": 22,
+   "videos_pct": 2.0,
+   "frames": 7156,
+   "frames_pct": 1.2,
+   "clips": 22,
+   "episodes": 10
+  }
+ },
+ "clips_without_V_view": [
+  "table30_v2:3232:9b062d43-e7ed-4ee8-9df5-24d8b3b109ca/main",
+  "table30_v2:90e1:1cdb21b1-8c46-44c2-b5da-37ae5182db51/main",
+  "table30_v2:90e1:a8255571-203f-45dd-b55b-d4e569c20b10/main",
+  "table30_v2:90e1:bc5b9ba6-2b1b-4b37-bd98-c9d623b34133/main",
+  "table_30:22ru:1c29e58d-ca5c-4c34-8de9-46f750963dfe/main",
+  "table_30:22ru:1c29e58d-ca5c-4c34-8de9-46f750963dfe/units_02_04",
+  "table_30:22ru:1c29e58d-ca5c-4c34-8de9-46f750963dfe/units_03_04",
+  "table_30:22v9:e3e8b019-b42d-4ba3-87ad-eadf3530ed11/main",
+  "table_30:23cn:2039b08d-2257-430d-ab5a-e2884b02d8bd/main",
+  "table_30:23cn:6d9a5300-1087-464a-9fb4-65334743938a/main",
+  "table_30:23cn:a9116cb7-c3cd-422f-9de1-fc7e50bc90ca/main"
+ ],
+ "D_breakdown": {
+  "P/X views": 380,
+  "fixed": 73,
+  "wrist": 307,
+  "V views in visibility_abstention clips": 14
+ },
+ "media": "one video per camera view of each clip, re-encoded at 30 fps",
+ "content_hash_checked": false
+}

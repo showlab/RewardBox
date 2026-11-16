@@ -1,0 +1,148 @@
+{
+  "model": "robodopamine-8b",
+  "video": "calibration/synthetic_pick.mp4",
+  "instruction": "move the red block onto the green target",
+  "sampling": {
+    "num_frames": 16,
+    "strategy": "all",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.57.1"
+  },
+  "output": {
+    "model": "robodopamine-8b",
+    "normalize": "none",
+    "progress": [
+      0.0,
+      0.030333333333333334,
+      0.26099999999999995,
+      0.965
+    ],
+    "frame_indices": [
+      10,
+      20,
+      30,
+      39
+    ],
+    "weights": [
+      0.0,
+      0.030333333333333334,
+      0.23066666666666666,
+      0.7873333333333333
+    ],
+    "success": null,
+    "raw": {
+      "per_mode_progress": {
+        "forward": [
+          0.0,
+          0.091,
+          0.5329999999999999,
+          1.0
+        ],
+        "incremental": [
+          0.0,
+          0.0,
+          0.25,
+          1.0
+        ],
+        "backward": [
+          0.0,
+          0.0,
+          0.0,
+          0.895
+        ]
+      },
+      "per_mode_hop": {
+        "forward": [
+          0.0,
+          0.091,
+          0.44199999999999995,
+          0.4670000000000001
+        ],
+        "incremental": [
+          0.0,
+          0.0,
+          0.25,
+          1.0
+        ],
+        "backward": [
+          0.0,
+          0.0,
+          0.0,
+          0.895
+        ]
+      },
+      "responses": {
+        "forward": [
+          "<score>0.0%</score>",
+          "<score>+9.1%</score>",
+          "<score>+53.3%</score>",
+          "<score>+100.0%</score>"
+        ],
+        "incremental": [
+          "<score>0.0%</score>",
+          "<score>0.0%</score>",
+          "<score>+25.0%</score>",
+          "<score>+100.0%</score>"
+        ],
+        "backward": [
+          "<score>-100.0%</score>",
+          "<score>-100.0%</score>",
+          "<score>-100.0%</score>",
+          "<score>-10.5%</score>"
+        ]
+      },
+      "official_after_local_indices": {
+        "forward": [
+          10,
+          20,
+          30,
+          39
+        ],
+        "incremental": [
+          10,
+          20,
+          30,
+          39
+        ],
+        "backward": [
+          10,
+          20,
+          30,
+          39
+        ]
+      }
+    },
+    "cost": {
+      "latency_s": 65.97112219900009,
+      "n_calls": 12,
+      "peak_vram_gb": 0.0
+    },
+    "meta": {
+      "adapter_calls_official": true,
+      "modes": [
+        "forward",
+        "incremental",
+        "backward"
+      ],
+      "fused": true,
+      "fusion": "mean(official README recommendation)",
+      "clamped": false,
+      "goal_image_source": "official_blank_placeholder",
+      "view_mode": "replicated_primary",
+      "frame_interval": 10,
+      "first_frame_omitted": true,
+      "n_backend_calls": 12,
+      "upstream": "examples.inference:GRMInference.run_pipeline",
+      "weights": "tanhuajie2001/Robo-Dopamine-GRM-2.0-8B-Preview"
+    }
+  }
+}

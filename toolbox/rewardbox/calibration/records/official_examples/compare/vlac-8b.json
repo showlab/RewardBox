@@ -1,0 +1,27 @@
+{
+  "model": "vlac-8b",
+  "source": "reward_model_code/VLAC/evo_vlac/examples/images/test (upstream-bundled, not copied into this repo)",
+  "image_late": "595-354-565-0.jpg",
+  "image_early": "595-6-565-0.jpg",
+  "instruction": "Scoop the rice into the rice cooker.",
+  "note": "compare() on the frame with clearly higher progress (late) versus the frame with clearly lower progress (early) from the official real images; late is expected to win. Contrasted with the opposite direction on the synthetic fixture, this shows the anomaly comes from out-of-distribution input, not an adapter/environment bug.",
+  "sampling": {
+    "num_frames": 1,
+    "strategy": "all",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "all:n=1:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.10.12",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.51.3"
+  },
+  "output": {
+    "compare_late_vs_early": 59.0,
+    "compare_early_vs_late": -59.0
+  }
+}

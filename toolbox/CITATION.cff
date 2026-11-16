@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use RewardBox (RRM-Hub) or RRM-Bench-1K, please cite the paper below."
+title: "RewardBox (RRM-Hub): one interface for robot reward models"
+type: software
+license: Apache-2.0
+url: "https://ethanliang99.github.io/awesome-robot-reward-model"
+authors:
+  - family-names: Liang
+    given-names: Guoqiang
+  - family-names: Lin
+    given-names: Yiqi
+  - family-names: Zhou
+    given-names: Shangchen
+  - family-names: Zeng
+    given-names: Wenzheng
+  - family-names: Chen
+    given-names: Yanzhe
+  - family-names: Bai
+    given-names: Zechen
+  - family-names: Shou
+    given-names: Mike Zheng
+preferred-citation:
+  type: article
+  title: "Robotic Reward Models in the Foundation-Model Era: A Survey and Capability Benchmark"
+  year: 2026
+  url: "https://ethanliang99.github.io/awesome-robot-reward-model"
+  authors:
+    - family-names: Liang
+      given-names: Guoqiang
+    - family-names: Lin
+      given-names: Yiqi
+    - family-names: Zhou
+      given-names: Shangchen
+    - family-names: Zeng
+      given-names: Wenzheng
+    - family-names: Chen
+      given-names: Yanzhe
+    - family-names: Bai
+      given-names: Zechen
+    - family-names: Shou
+      given-names: Mike Zheng

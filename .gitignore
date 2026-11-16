@@ -1,0 +1,6 @@
+# RRM-Bench-1K videos are distributed separately (dataset hosting), not through git.
+benchmark/episodes/**/*.mp4
+
+__pycache__/
+*.py[cod]
+.pytest_cache/

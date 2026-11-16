@@ -1,0 +1,39 @@
+# Input of the isolated VLAC-Cut environment, not a generated lock.
+#
+# Versions copied verbatim from the upstream reward-environment recipe:
+#   reward_model_code/VLAC-cut/real_robot_rl/server/README.md
+#   ("Select an existing VLAC-Cut reward environment, or prepare one separately")
+# The upstream root requirements.txt pins nothing; the README Quick Start run_example.py and the
+# real_robot_rl reward server use the same ms-swift PtEngine entry point, so the server
+# README pins are the authoritative environment for that entry point.
+#
+# Not part of the shared RewardBox py311 lock: the shared environment is torch 2.8 / transformers 4.57.1,
+# upstream pins torch 2.6 / transformers 4.57.6 / ms-swift 3.12.4, and mixing them would change the shared environment.
+torch==2.6.0
+torchvision==0.21.0
+transformers==4.57.6
+ms-swift==3.12.4
+qwen-vl-utils==0.0.14
+decord==0.6.0
+numpy==1.26.4
+Pillow
+opencv-python-headless
+imageio
+imageio-ffmpeg
+
+# Packages listed in the upstream requirements.txt but not in the server README (device_map="auto"
+# needs accelerate; ms-swift depends on it too).  Not pinned; uv resolves them under the constraints above.
+accelerate
+safetensors
+av
+huggingface_hub
+
+# RewardBox's own core dependencies (pyproject.toml [project.dependencies]).  RewardBox is
+# installed editable with --no-deps so lower bounds such as opencv-python-headless>=4.7
+# never change the upstream pins in reverse.
+scipy>=1.9
+pyyaml>=6.0
+tqdm>=4.64
+rich>=13.0
+packaging>=23.0
+pytest

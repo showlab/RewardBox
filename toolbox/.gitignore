@@ -1,0 +1,28 @@
+# Environments and caches
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Pinned upstream checkouts (`rewardbox fetch-upstream`); commits live in rewardbox/upstream.py
+reward_model_code/
+
+# Model weights / Hugging Face cache and runtime artifacts
+.hf/
+*.safetensors
+*.pt
+*.npy
+unsloth_compiled_cache/
+results/
+outputs/
+
+# Credentials
+.env
+.env.*
+!.env.example

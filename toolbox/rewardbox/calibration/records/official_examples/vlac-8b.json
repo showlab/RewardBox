@@ -1,0 +1,142 @@
+{
+  "model": "vlac-8b",
+  "source": "reward_model_code/VLAC/evo_vlac/examples/images/test (upstream-bundled, not copied into this repo)",
+  "images": [
+    "595-6-565-0.jpg",
+    "595-44-565-0.jpg",
+    "595-134-565-0.jpg",
+    "595-139-565-0.jpg",
+    "595-292-565-0.jpg",
+    "595-354-565-0.jpg"
+  ],
+  "instruction": "Scoop the rice into the rice cooker.",
+  "note": "Official real robot-arm rice-scooping example images (shipped with VLAC's evo_vlac/examples/image_pair-wise_critic_example.py), used to show that vlac-8b works on in-distribution real data; complements calibration/records/vlac-8b.json (RewardBox synthetic fixture, out of distribution) rather than replacing it. The images belong to the upstream VLAC repository and are not copied here; re-running needs the reward_model_code/VLAC checkout.",
+  "sampling": {
+    "num_frames": 6,
+    "strategy": "all",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "all:n=6:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.10.12",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.51.3"
+  },
+  "output": {
+    "model": "vlac-8b",
+    "normalize": "none",
+    "progress": [
+      0.0,
+      6.0,
+      21.98,
+      22.7602,
+      49.021732,
+      58.19782024
+    ],
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "weights": null,
+    "success": null,
+    "raw": {
+      "critic_list": [
+        6.0,
+        17.0,
+        1.0,
+        34.0,
+        18.0
+      ],
+      "official_value_list": [
+        0.0,
+        6.0,
+        21.98,
+        22.7602,
+        49.021732,
+        58.19782024
+      ],
+      "critic_pair_local_indices": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "critic_pair_frame_indices": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "cost": {
+      "latency_s": 8.93171615099709,
+      "n_calls": 1,
+      "peak_vram_gb": 20.102528512
+    },
+    "meta": {
+      "adapter_calls_official": true,
+      "protocol": "controlled_in_memory_images",
+      "model_path": "InternRobotics/VLAC-8b",
+      "model_type": "internvl2",
+      "device_map": "auto",
+      "official_args": {
+        "batch_num": 5,
+        "skip": 1,
+        "rich": false,
+        "think": false,
+        "frame_skip": true,
+        "reverse_eval": false,
+        "ref_num": 0,
+        "value_simple": true
+      },
+      "reference_trajectory": "none",
+      "value_scale": "official_nominal_0_to_100_unclamped",
+      "normalized": false,
+      "padded_or_truncated": false,
+      "first_value": "official_zero_without_pair",
+      "n_backend_calls": 1,
+      "upstream": "evo_vlac:GAC_model.get_trajectory_critic",
+      "weights": "InternRobotics/VLAC-8b"
+    }
+  }
+}

@@ -1,0 +1,1646 @@
+[
+  {
+    "name": "flora-rewarder-27b",
+    "method": "Flora-Rewarder",
+    "runtime": "isolated worker",
+    "environment": ".venv-flora (py3.12, vLLM 0.24)",
+    "reward_mode": "progress",
+    "signal_type": "token_logprob",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist",
+      "top",
+      "left",
+      "right",
+      "wrist"
+    ],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "nvidia/Flora-Rewarder@031299e46e452fc0cedb4e0975eb9fa95fc37783",
+    "paper": "https://huggingface.co/nvidia/Flora-Rewarder",
+    "upstream_entry": "https://huggingface.co/nvidia/Flora-Rewarder@031299e46e452fc0cedb4e0975eb9fa95fc37783; batch_utils/terminal_reward.py + batch_utils/core.py",
+    "upstream_checkouts": [],
+    "credentials_env": [],
+    "vram_gb": 60.0,
+    "python": ">=3.12,<3.13",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Flora terminal reward: whole episode, up to 64 frames at <=10 FPS, 1-5 score decoded greedily under a regex; progress=(E[score]-1)/4 from P(1..5) at the score token."
+  },
+  {
+    "name": "flora-rewarder-27b-prefix",
+    "method": "Flora-Rewarder",
+    "runtime": "isolated worker",
+    "environment": ".venv-flora (py3.12, vLLM 0.24)",
+    "reward_mode": "progress",
+    "signal_type": "token_logprob",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist",
+      "top",
+      "left",
+      "right",
+      "wrist"
+    ],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "nvidia/Flora-Rewarder@031299e46e452fc0cedb4e0975eb9fa95fc37783",
+    "paper": "https://huggingface.co/nvidia/Flora-Rewarder",
+    "upstream_entry": "https://huggingface.co/nvidia/Flora-Rewarder@031299e46e452fc0cedb4e0975eb9fa95fc37783; batch_utils/terminal_reward.py + batch_utils/core.py",
+    "upstream_checkouts": [],
+    "credentials_env": [],
+    "vram_gb": 60.0,
+    "python": ">=3.12,<3.13",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "RewardBox prefix-curve extension of the Flora terminal reward: each causal prefix is scored as a whole episode with the native sampling, timing and prompt."
+  },
+  {
+    "name": "gvl",
+    "method": "GVL",
+    "runtime": "hosted API",
+    "environment": "shared; GEMINI_API_KEY",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2603.02115",
+    "upstream_entry": "robometer.evals.baselines.gvl:GVL.compute_progress",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [
+      "GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Robometer's API-based Gemini progress baseline. Strictly reuses the 8-frame sub-protocol expressible by its confusion-matrix GVL command (Gemini 2.5 Flash Lite); upstream released no reward-alignment/policy-ranking recipe, so Table I equivalence is not claimed."
+  },
+  {
+    "name": "gvl-gemini-3.5-flash-lite",
+    "method": "GVL",
+    "runtime": "hosted API",
+    "environment": "shared; GEMINI_API_KEY",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2603.02115",
+    "upstream_entry": "robometer.evals.baselines.gvl:GVL.compute_progress",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [
+      "GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Robometer GVL's official JPEG/shuffle/prompt/SSE/parser path, explicitly migrated to Gemini 3.5 Flash Lite. Google refuses the frozen 2.5 endpoint for new users; this identity does not pose as the upstream confusion-matrix recipe or a Table I reproduction."
+  },
+  {
+    "name": "gvl-gemini-3.8-flash",
+    "method": "GVL",
+    "runtime": "hosted API",
+    "environment": "shared; GEMINI_API_KEY",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2411.04549",
+    "upstream_entry": "robometer.evals.baselines.gvl:GVL.compute_progress",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [
+      "GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "GVL + Gemini 3.8 Flash in Gemini native format; keeps the existing 8-frame scoring flow and records the model/transport migration separately; no paper reproduction is claimed."
+  },
+  {
+    "name": "gvl-gemini-3.8-flash-dense",
+    "method": "GVL",
+    "runtime": "hosted API",
+    "environment": "shared; GEMINI_API_KEY",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2411.04549",
+    "upstream_entry": "robometer.evals.baselines.gvl:GVL.compute_progress",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [
+      "GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "GVL + Gemini 3.8 Flash; reuses the runner's sampling grid, aligned with SOLE 1 Hz by default. Keeps GVL's global random shuffle and the same prompt/parser; one request covers all sampled frames."
+  },
+  {
+    "name": "jev-1.14-pair",
+    "method": "Jev (protocol)",
+    "runtime": "hosted API",
+    "environment": "shared; base_url and JEV_API_KEY or api_key_env",
+    "reward_mode": "preference",
+    "signal_type": "option_probability",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "",
+    "upstream_entry": "rewardbox.adapters.jev (RewardBox protocol over the jev-1.14.0 API)",
+    "upstream_checkouts": [],
+    "credentials_env": [
+      "JEV_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/guides/general_vlm_and_jev.md",
+    "description": "Jev 1.14, Pair protocol: one request per adjacent pair of sampled observations, two-option choice (rising / falling). progress is 0 for the first observation, then the judgement of each transition; it is not a curve (see raw.transition_directions)."
+  },
+  {
+    "name": "jev-1.14-sequence",
+    "method": "Jev (protocol)",
+    "runtime": "hosted API",
+    "environment": "shared; base_url and JEV_API_KEY or api_key_env",
+    "reward_mode": "progress",
+    "signal_type": "option_probability",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      0.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "",
+    "upstream_entry": "rewardbox.adapters.jev (RewardBox protocol over the jev-1.14.0 API)",
+    "upstream_checkouts": [],
+    "credentials_env": [
+      "JEV_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/guides/general_vlm_and_jev.md",
+    "description": "Jev 1.14, Sequence protocol: all sampled observations (1 FPS by default) in one request, one five-level completion question per observation; progress is the expected level x 25."
+  },
+  {
+    "name": "lrm-completion",
+    "method": "LRM",
+    "runtime": "model server (HTTP)",
+    "environment": "server in its own py3.10 env",
+    "reward_mode": "success",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": true,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/completion",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "LRM binary completion head: native per-frame 0/1 completion verdicts; inference through the official Flask server."
+  },
+  {
+    "name": "lrm-completion-vllm",
+    "method": "LRM",
+    "runtime": "in-process vLLM (RewardBox backend)",
+    "environment": "shared py3.11",
+    "reward_mode": "success",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": true,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/completion",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "lrm-completion: native prompt and frame/pair semantics; opt-in batched vLLM execution."
+  },
+  {
+    "name": "lrm-contrastive",
+    "method": "LRM",
+    "runtime": "model server (HTTP)",
+    "environment": "server in its own py3.10 env",
+    "reward_mode": "preference",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -1.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/contrastive",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "LRM temporal contrastive head: 0 for the first frame, then adjacent-frame comparisons output -1/0/+1; inference through the official Flask server."
+  },
+  {
+    "name": "lrm-contrastive-vllm",
+    "method": "LRM",
+    "runtime": "in-process vLLM (RewardBox backend)",
+    "environment": "shared py3.11",
+    "reward_mode": "preference",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -1.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/contrastive",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "lrm-contrastive: native prompt and frame/pair semantics; opt-in batched vLLM execution."
+  },
+  {
+    "name": "lrm-progress",
+    "method": "LRM",
+    "runtime": "model server (HTTP)",
+    "environment": "server in its own py3.10 env",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/progress",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "LRM absolute progress head: native per-frame 0-1 progress; inference through the official Flask server."
+  },
+  {
+    "name": "lrm-progress-vllm",
+    "method": "LRM",
+    "runtime": "in-process vLLM (RewardBox backend)",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/progress",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "lrm-progress: native prompt and frame/pair semantics; opt-in batched vLLM execution."
+  },
+  {
+    "name": "lrm-tri",
+    "method": "LRM",
+    "runtime": "model server (HTTP)",
+    "environment": "server in its own py3.10 env",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "USC-PSI-Lab/LRM-models@5f8da7f3934f5d658256d77552927a9f76ad1c0e/{contrastive,progress,completion}; no independent tri weights",
+    "paper": "https://arxiv.org/abs/2603.16065",
+    "upstream_entry": "Large-Reward-Models/vlm_reward/vlm_reward_client.py:VLMRewardClient -> vlm_reward/vlm_reward_server.py",
+    "upstream_checkouts": [
+      "lrm"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Fixed equal-weight fusion of the three LRM heads: contrastive is first mapped from [-1,1] to [0,1], then fused with progress/completion; no separate tri weights or tunable fusion coefficients."
+  },
+  {
+    "name": "primo-r1-7b",
+    "method": "PRIMO-R1",
+    "runtime": "isolated worker",
+    "environment": ".venv-primo (py3.11, vLLM 0.7.2)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "LeonOverload/PRIMO-R1-7B@4d452de3f721ec20e311e3a2dff309df7e022a69",
+    "paper": "https://arxiv.org/abs/2603.15600",
+    "upstream_entry": "PRIMO-R1/src/eval/eval_interleave.py + src/primo_prompts.py",
+    "upstream_checkouts": [
+      "primo"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11,<3.12",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "PRIMO-R1 native initial image/video/current image input; one terminal raw percentage. The task instruction is bound into its regression question."
+  },
+  {
+    "name": "primo-r1-7b-prefix",
+    "method": "PRIMO-R1",
+    "runtime": "isolated worker",
+    "environment": ".venv-primo (py3.11, vLLM 0.7.2)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "LeonOverload/PRIMO-R1-7B@4d452de3f721ec20e311e3a2dff309df7e022a69",
+    "paper": "https://arxiv.org/abs/2603.15600",
+    "upstream_entry": "PRIMO-R1/src/eval/eval_interleave.py + src/primo_prompts.py",
+    "upstream_checkouts": [
+      "primo"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11,<3.12",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Explicit RewardBox prefix-curve extension of PRIMO-R1; each point uses the native interleaved input, prompt and sampling. No interpolation."
+  },
+  {
+    "name": "procvlm-2b",
+    "method": "ProcVLM",
+    "runtime": "model server (HTTP)",
+    "environment": "server in upstream uv env (py3.10)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "ce-amtic/ProcVLM-2B@a7f5c18c6128a9c2a478a62ecc356f19f0e0bcf5",
+    "paper": "https://arxiv.org/abs/2605.08774",
+    "upstream_entry": "https://github.com/RUCKBReasoning/ProcVLM@377523a31f05bab9c0db5ac8b9edfa7b7f03968a; evqa.inference + evqa.model.batch_chat_with_vllm",
+    "upstream_checkouts": [
+      "procvlm"
+    ],
+    "credentials_env": [],
+    "vram_gb": 12.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Released ProcVLM-2B procedure-grounded progress estimator. Returns the official textual completion percentage and preserves every raw reasoning/output record."
+  },
+  {
+    "name": "robo-valuerl-value",
+    "method": "Robo-ValueRL",
+    "runtime": "model server (HTTP)",
+    "environment": "server in its own env",
+    "reward_mode": "progress",
+    "signal_type": "value_head",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary",
+      "left_wrist",
+      "right_wrist"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "X-Humanoid/Robo-ValueRL@b44f33eaa5892233174d596cc7d8a7e685967eef:value_estimator/model.safetensors",
+    "paper": "https://arxiv.org/abs/2607.09866",
+    "upstream_entry": "Open-X-Humanoid/Robo-ValueRL@1618bcb; OpenPi_X_Humanoid_Critic.predict_value -> remain_time; official HL-Gauss decode and annotation interpolation",
+    "upstream_checkouts": [
+      "robovaluerl"
+    ],
+    "credentials_env": [],
+    "vram_gb": 32.0,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Released Robo-ValueRL short-history remaining-step estimator. Returns the paper-defined [0,1] progress value and preserves decoded remaining steps plus all key-frame distributions as raw evidence."
+  },
+  {
+    "name": "robodopamine-8b",
+    "method": "Robo-Dopamine (GRM)",
+    "runtime": "in-process vLLM",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      2.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "tanhuajie2001/Robo-Dopamine-GRM-2.0-8B-Preview",
+    "paper": "https://arxiv.org/pdf/2512.23703",
+    "upstream_entry": "examples.inference:GRMInference.run_pipeline",
+    "upstream_checkouts": [
+      "robodopamine"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": "score",
+    "evidence": "docs/validation.md",
+    "description": "Compatibility name: same as robodopamine-v2-8b. BEFORE/AFTER three-view relative progress scoring, averaged over three modes (forward/incremental/backward), as the official README recommends."
+  },
+  {
+    "name": "robodopamine-v1-3b",
+    "method": "Robo-Dopamine (GRM)",
+    "runtime": "in-process vLLM",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      2.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "tanhuajie2001/Robo-Dopamine-GRM-3B",
+    "paper": "https://arxiv.org/pdf/2512.23703",
+    "upstream_entry": "examples.inference:GRMInference.run_pipeline",
+    "upstream_checkouts": [
+      "robodopamine"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "v1 / GRM-3B (RoboBrain2.0-3B). BEFORE/AFTER three-view relative progress scoring, averaged over three modes (forward/incremental/backward), as the official README recommends. The v1 official examples use three views and a reference goal image; quality without a goal image is unverified."
+  },
+  {
+    "name": "robodopamine-v1-8b",
+    "method": "Robo-Dopamine (GRM)",
+    "runtime": "in-process vLLM",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      2.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "tanhuajie2001/Robo-Dopamine-GRM-8B",
+    "paper": "https://arxiv.org/pdf/2512.23703",
+    "upstream_entry": "examples.inference:GRMInference.run_pipeline",
+    "upstream_checkouts": [
+      "robodopamine"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "v1 / GRM-8B (RoboBrain2.0-8B). BEFORE/AFTER three-view relative progress scoring, averaged over three modes (forward/incremental/backward), as the official README recommends. The v1 official examples use three views and a reference goal image; quality without a goal image is unverified."
+  },
+  {
+    "name": "robodopamine-v2-4b",
+    "method": "Robo-Dopamine (GRM)",
+    "runtime": "in-process vLLM",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      2.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "tanhuajie2001/Robo-Dopamine-GRM-2.0-4B-Preview",
+    "paper": "https://arxiv.org/pdf/2512.23703",
+    "upstream_entry": "examples.inference:GRMInference.run_pipeline",
+    "upstream_checkouts": [
+      "robodopamine"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "v2 / GRM-2.0-4B-Preview. BEFORE/AFTER three-view relative progress scoring, averaged over three modes (forward/incremental/backward), as the official README recommends."
+  },
+  {
+    "name": "robodopamine-v2-8b",
+    "method": "Robo-Dopamine (GRM)",
+    "runtime": "in-process vLLM",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      2.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "tanhuajie2001/Robo-Dopamine-GRM-2.0-8B-Preview",
+    "paper": "https://arxiv.org/pdf/2512.23703",
+    "upstream_entry": "examples.inference:GRMInference.run_pipeline",
+    "upstream_checkouts": [
+      "robodopamine"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "v2 / GRM-2.0-8B-Preview. BEFORE/AFTER three-view relative progress scoring, averaged over three modes (forward/incremental/backward), as the official README recommends."
+  },
+  {
+    "name": "robometer-4b",
+    "method": "Robometer",
+    "runtime": "in-process",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "value_head",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": true,
+    "outputs_success": true,
+    "weights": "aliangdw/Robometer-4B",
+    "paper": "https://arxiv.org/abs/2603.02115",
+    "upstream_entry": "robometer.evals.eval_server:compute_batch_outputs",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [],
+    "vram_gb": 14.0,
+    "python": ">=3.10",
+    "calibration_record": "score+compare",
+    "evidence": "docs/validation.md",
+    "description": "Dedicated reward model with a progress head and a success head; one forward pass outputs per-frame progress and success probability for the whole trajectory; natively supports trajectory comparison."
+  },
+  {
+    "name": "robometer-4b-libero",
+    "method": "Robometer",
+    "runtime": "in-process",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "value_head",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": true,
+    "outputs_success": true,
+    "weights": "aliangdw/Robometer-4B-LIBERO",
+    "paper": "https://arxiv.org/abs/2603.02115",
+    "upstream_entry": "robometer.evals.eval_server:compute_batch_outputs",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [],
+    "vram_gb": 14.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Dedicated reward model with a progress head and a success head; one forward pass outputs per-frame progress and success probability for the whole trajectory; natively supports trajectory comparison."
+  },
+  {
+    "name": "roboreward-4b",
+    "method": "RoboReward",
+    "runtime": "in-process",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "model_card_reference",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "teetone/RoboReward-4B",
+    "paper": "https://arxiv.org/abs/2601.00675",
+    "upstream_entry": "(no official code) model card: https://huggingface.co/teetone/RoboReward-4B",
+    "upstream_checkouts": [],
+    "credentials_env": [],
+    "vram_gb": 20.0,
+    "python": ">=3.10",
+    "calibration_record": "score",
+    "evidence": "docs/validation.md",
+    "description": "Fine-tuned Qwen3-VL that outputs a discrete 1-5 terminal progress score, mapped to (s-1)/4. The model card defines an end-of-episode score; per-prefix calls are an extension."
+  },
+  {
+    "name": "roboreward-8b",
+    "method": "RoboReward",
+    "runtime": "in-process",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "model_card_reference",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "teetone/RoboReward-8B",
+    "paper": "https://arxiv.org/abs/2601.00675",
+    "upstream_entry": "(no official code) model card: https://huggingface.co/teetone/RoboReward-4B",
+    "upstream_checkouts": [],
+    "credentials_env": [],
+    "vram_gb": 20.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Fine-tuned Qwen3-VL that outputs a discrete 1-5 terminal progress score, mapped to (s-1)/4. The model card defines an end-of-episode score; per-prefix calls are an extension."
+  },
+  {
+    "name": "rynnvalue-4b",
+    "method": "RynnValue",
+    "runtime": "model server (HTTP)",
+    "environment": "server in upstream uv env (py3.10)",
+    "reward_mode": "progress",
+    "signal_type": "value_head",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -512.0,
+      0.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "Alibaba-DAMO-Academy/RynnValue-4B@3f73b5d2b5e53b21f248c8791004dde6a8cf2b92",
+    "paper": "https://arxiv.org/abs/2608.09853",
+    "upstream_entry": "RynnValue/robometer/scripts/example_inference.py multipart client -> robometer/evals/baseline_eval_server.py -> baselines/rynnvalue.py:RynnValue.compute_progress",
+    "upstream_checkouts": [
+      "rynnvalue"
+    ],
+    "credentials_env": [],
+    "vram_gb": 24.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "RynnValue 4B temporal-distance value model.  Returns the official raw negative remaining-time curve through the isolated Robometer HTTP server."
+  },
+  {
+    "name": "rynnvalue-8b",
+    "method": "RynnValue",
+    "runtime": "model server (HTTP)",
+    "environment": "server in upstream uv env (py3.10)",
+    "reward_mode": "progress",
+    "signal_type": "value_head",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 8,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=8:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -512.0,
+      0.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "Alibaba-DAMO-Academy/RynnValue-8B@8738c5e4ce4418ea0266e9fbeffae0eb9bbb230e",
+    "paper": "https://arxiv.org/abs/2608.09853",
+    "upstream_entry": "RynnValue/robometer/scripts/example_inference.py multipart client -> robometer/evals/baseline_eval_server.py -> baselines/rynnvalue.py:RynnValue.compute_progress",
+    "upstream_checkouts": [
+      "rynnvalue"
+    ],
+    "credentials_env": [],
+    "vram_gb": 40.0,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "RynnValue 8B temporal-distance value model.  Returns the official raw negative remaining-time curve through the isolated Robometer HTTP server."
+  },
+  {
+    "name": "sole-r1-8b",
+    "method": "SOLE-R1",
+    "runtime": "model server (ZMQ)",
+    "environment": "server in its own py3.10 env",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist"
+    ],
+    "score_range": [
+      -100.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "Philip-MIT/SOLE-R1-8B",
+    "paper": "https://arxiv.org/abs/2603.28730",
+    "upstream_entry": "sole-r1-model/reward_client/utils.py:InferenceClient.call -> sole-r1-model/reward_server/src/reward_server/main.py:callback",
+    "upstream_checkouts": [
+      "sole-r1"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": "score",
+    "evidence": "docs/validation.md",
+    "description": "SOLE-R1 8B video-language reasoning reward model.  Calls the official standalone reward server and returns its raw per-timestep progress percentages plus reasoning traces; supports external-only or paired external/left-wrist views."
+  },
+  {
+    "name": "topreward",
+    "method": "TOPReward",
+    "runtime": "in-process",
+    "environment": "shared py3.11 (+ flash-attn wheel)",
+    "reward_mode": "progress",
+    "signal_type": "token_logprob",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 64,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=64:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      0.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "Qwen/Qwen3-VL-8B-Instruct",
+    "paper": "https://arxiv.org/pdf/2602.19313",
+    "upstream_entry": "robometer.evals.baselines.topreward:TopReward.compute_progress",
+    "upstream_checkouts": [
+      "robometer"
+    ],
+    "credentials_env": [],
+    "vram_gb": 20.0,
+    "python": ">=3.11",
+    "calibration_record": "score",
+    "evidence": "docs/validation.md",
+    "description": "Robometer Table-I TOPReward baseline: official prefix log-probs are min-max normalised and linearly interpolated to every sampled input frame."
+  },
+  {
+    "name": "topreward-qwen2.5-7b",
+    "method": "TOPReward",
+    "runtime": "in-process",
+    "environment": "shared py3.11 (+ flash-attn wheel)",
+    "reward_mode": "progress",
+    "signal_type": "token_logprob",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 15,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=15:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -40.0,
+      0.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "paper": "https://arxiv.org/pdf/2602.19313",
+    "upstream_entry": "topreward.clients.qwen:QwenClient.compute_instruction_rewards_for_prefixes",
+    "upstream_checkouts": [
+      "topreward"
+    ],
+    "credentials_env": [],
+    "vram_gb": 20.0,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Unverified non-Table-I TOPReward native-client variant. The vendored QwenClient hard-codes Qwen3VLForConditionalGeneration; validate this Qwen2.5 checkpoint independently before relying on it."
+  },
+  {
+    "name": "vlac-2b",
+    "method": "VLAC",
+    "runtime": "isolated worker",
+    "environment": ".venv-vlac (py3.10, ms-swift 3.3)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 64,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=64:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -100.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": true,
+    "outputs_success": false,
+    "weights": "InternRobotics/VLAC",
+    "paper": "https://arxiv.org/abs/2509.15937",
+    "upstream_entry": "evo_vlac:GAC_model.get_trajectory_critic",
+    "upstream_checkouts": [
+      "vlac"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.9",
+    "calibration_record": "score+compare",
+    "evidence": "docs/validation.md",
+    "description": "Official pair-wise image critic; adjacent-frame critics are accumulated by the official formula into nominal 0-100 progress. RewardBox uses the in-memory image entry point and keeps the raw scale."
+  },
+  {
+    "name": "vlac-8b",
+    "method": "VLAC",
+    "runtime": "isolated worker",
+    "environment": ".venv-vlac (py3.10, ms-swift 3.3)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 64,
+      "strategy": "uniform",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "uniform:n=64:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -100.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": true,
+    "outputs_success": false,
+    "weights": "InternRobotics/VLAC-8b",
+    "paper": "https://arxiv.org/abs/2509.15937",
+    "upstream_entry": "evo_vlac:GAC_model.get_trajectory_critic",
+    "upstream_checkouts": [
+      "vlac"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.9",
+    "calibration_record": "score+compare",
+    "evidence": "docs/validation.md",
+    "description": "Official pair-wise image critic; adjacent-frame critics are accumulated by the official formula into nominal 0-100 progress. RewardBox uses the in-memory image entry point and keeps the raw scale."
+  },
+  {
+    "name": "vlac-cut",
+    "method": "VLAC-Cut",
+    "runtime": "isolated worker",
+    "environment": ".venv-vlac-cut (py3.11, ms-swift 3.12)",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "official_adapter",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -100.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "InternRobotics/VLAC-Cut@2a809cbb10d63c2e5b1b3f046426c554f437bdb5",
+    "paper": "https://arxiv.org/abs/2607.09776",
+    "upstream_entry": "https://github.com/InternRobotics/VLAC-cut@354df56ff177018f4ed3849996b3b1fc9cadedc8; scripts/run_example.py (ms-swift PtEngine) | scripts/run_vpb_inference.py (transformers)",
+    "upstream_checkouts": [
+      "vlac-cut"
+    ],
+    "credentials_env": [],
+    "vram_gb": 65.0,
+    "python": ">=3.11,<3.12",
+    "calibration_record": null,
+    "evidence": "docs/validation.md",
+    "description": "Qwen3-VL-30B-A3B video progress critic: a 2 Hz frame sequence -> generated, timestamped, signed progress keypoints (may regress, non-monotonic). The raw response and keypoints are kept."
+  },
+  {
+    "name": "vlac-cut-vllm",
+    "method": "VLAC-Cut",
+    "runtime": "in-process vLLM (RewardBox backend)",
+    "environment": "shared py3.11",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "all",
+      "fps": null,
+      "interval": null,
+      "resize": null,
+      "include_last": true,
+      "key": "all:n=16:fps=-:interval=-:resize=-:last=1"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [],
+    "score_range": [
+      -100.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "InternRobotics/VLAC-Cut@2a809cbb10d63c2e5b1b3f046426c554f437bdb5",
+    "paper": "https://arxiv.org/abs/2607.09776",
+    "upstream_entry": "https://github.com/InternRobotics/VLAC-cut@354df56ff177018f4ed3849996b3b1fc9cadedc8; scripts/run_example.py (ms-swift PtEngine) | scripts/run_vpb_inference.py (transformers)",
+    "upstream_checkouts": [
+      "vlac-cut"
+    ],
+    "credentials_env": [],
+    "vram_gb": null,
+    "python": ">=3.11",
+    "calibration_record": null,
+    "evidence": "docs/guides/vllm_adapters.md",
+    "description": "VLAC-Cut native Swift frame/prompt/curve protocol with opt-in vLLM generation."
+  },
+  {
+    "name": "vlm-pair",
+    "method": "General VLM (protocol)",
+    "runtime": "hosted API",
+    "environment": "shared; OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY or api_key_env",
+    "reward_mode": "preference",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      -1.0,
+      1.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2608.14284",
+    "upstream_entry": "rewardbox.adapters.general_vlm (RewardBox protocol; prompts/vlm_*_v1.txt)",
+    "upstream_checkouts": [],
+    "credentials_env": [
+      "OPENAI_API_KEY | ANTHROPIC_API_KEY | GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/guides/general_vlm_and_jev.md",
+    "description": "General VLM, Pair protocol: one request per adjacent pair of sampled observations, forced +1/-1 direction. progress is 0 for the first observation, then the judgement of each transition; it is not a curve (see raw.transition_directions)."
+  },
+  {
+    "name": "vlm-sequence",
+    "method": "General VLM (protocol)",
+    "runtime": "hosted API",
+    "environment": "shared; OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY or api_key_env",
+    "reward_mode": "progress",
+    "signal_type": "generated_text",
+    "implementation_kind": "rewardbox_extension",
+    "default_sampling": {
+      "num_frames": 16,
+      "strategy": "fps",
+      "fps": 1.0,
+      "interval": null,
+      "resize": null,
+      "include_last": false,
+      "key": "fps:n=16:fps=1.0:interval=-:resize=-:last=0"
+    },
+    "required_views": [
+      "primary"
+    ],
+    "optional_views": [
+      "left_wrist",
+      "right_wrist"
+    ],
+    "score_range": [
+      0.0,
+      100.0
+    ],
+    "higher_better": true,
+    "supports_pairwise": false,
+    "outputs_success": false,
+    "weights": "",
+    "paper": "https://arxiv.org/abs/2608.14284",
+    "upstream_entry": "rewardbox.adapters.general_vlm (RewardBox protocol; prompts/vlm_*_v1.txt)",
+    "upstream_checkouts": [],
+    "credentials_env": [
+      "OPENAI_API_KEY | ANTHROPIC_API_KEY | GEMINI_API_KEY"
+    ],
+    "vram_gb": null,
+    "python": ">=3.10",
+    "calibration_record": null,
+    "evidence": "docs/guides/general_vlm_and_jev.md",
+    "description": "General VLM, Sequence protocol: all sampled observations (1 FPS by default) in one request, one 0-100 completion score per observation. The API model is the required option model=...; prompts are RewardBox's own (v1)."
+  }
+]

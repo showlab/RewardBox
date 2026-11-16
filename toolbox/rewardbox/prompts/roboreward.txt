@@ -1,0 +1,9 @@
+Given the task, assign a discrete progress score reward (1,2,3,4,5) for the robot in the video in the format: ANSWER: <score>
+Rubric for end-of-episode progress (judge only the final state without time limits):
+1 - No Success: Final state shows no goal-relevant change for the command.
+2 - Minimal Progress: Final state shows a small but insufficient change toward the goal.
+3 - Partial Completion: The final state shows good progress toward the goal but violates more than one requirement or a major requirement.
+4 - Near Completion: Final state is correct in region and intent but misses a single minor requirement.
+5 - Perfect Completion: Final state satisfies all requirements.
+
+Task: {instruction}

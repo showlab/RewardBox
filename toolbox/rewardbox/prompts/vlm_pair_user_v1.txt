@@ -1,0 +1,17 @@
+Task instruction:
+<task_instruction>
+$task_instruction
+</task_instruction>
+
+You will receive two temporally adjacent observations, labeled BEFORE and AFTER. Images under the same observation label are simultaneous views, not additional time steps.
+
+Compare the physical task progress in AFTER with BEFORE. Consider the task-relevant objects, their relations to the goal, and any achieved state that is lost. Ignore appearance changes that do not affect the task. Do not use elapsed time alone as evidence of progress.
+
+Make a forced binary direction judgment:
++1: AFTER is closer to satisfying the task than BEFORE.
+-1: AFTER is further from satisfying the task than BEFORE.
+If the visual evidence is ambiguous, choose the direction best supported by the observations. This binary baseline has no unchanged or abstention output.
+
+Return exactly one of the following, with no explanation:
+<score>+1</score>
+<score>-1</score>

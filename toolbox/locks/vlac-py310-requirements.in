@@ -1,0 +1,44 @@
+# Input of the isolated VLAC environment, not a generated lock.
+#
+# The upstream README recommends Python 3.10 / transformers 4.51.3 and pins ms-swift 3.3.
+# These versions stay out of RewardBox's shared py311/transformers 4.57 lock.  Installation: see
+# docs/installation.md.
+#
+# torch pinned to 2.8.0 (not upstream's >=2.0): measured in .venv-vlac on 2026-07-26, an
+# unconstrained resolve picks torch 2.13+cu13, while the official prebuilt flash-attn wheels only
+# go up to torch2.8/cu12, with no 2.13/cu13 build.  2.8.0 is the same verified torch/flash-attn
+# combination as the shared environment (see locks/shared-requirements.in),
+# with the wheel's python tag switched to cp310.
+torch==2.8.0
+torchvision==0.23.0
+transformers==4.51.3
+peft>=0.15.2
+ms-swift==3.3
+timm
+
+# sentencepiece>=0.2 validates some pieces of InternLM2's tokenizer.model more strictly and
+# passes the RuntimeError("piece must not include null character") raised by sp_model.Load()
+# in InternLM2Tokenizer.__init__ on to transformers;
+# the SPM/TikToken fallback branch of tokenization_utils_base.py turns *any*
+# RuntimeError (not only the kind its comment mentions) silently into ``return False``,
+# so AutoTokenizer.from_pretrained() returns a bare bool instead of raising or really
+# falling back, and only downstream ms-swift accessing tokenizer.model_info reports
+# "'bool' object has no attribute 'model_info'".  Confirmed in .venv-vlac on 2026-07-26;
+# pinning 0.1.99 avoids that check (see docs/installation.md).
+sentencepiece==0.1.99
+
+# flash-attn is not resolved by uv here: VLAC's init_model fixes
+# attn_impl='flash_attn' -> transformers attn_implementation="flash_attention_2";
+# confirmed in .venv-vlac on 2026-07-26 that a missing install is a hard ImportError, never a silent
+# fallback to sdpa (the same class of problem as TOPReward, see docs/installation.md).  Install with:
+#   uv pip install --python .venv-vlac/bin/python \
+#     https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/\
+#     flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp310-cp310-linux_x86_64.whl
+# (choose the TRUE/FALSE wheel variant from torch._C._GLIBCXX_USE_CXX11_ABI)
+loguru
+matplotlib
+requests
+
+# The upstream pyproject lists opencv-python; RewardBox only uses the in-memory image entry and
+# needs no GUI, so it uses the headless wheel providing the same cv2 import and avoids two OpenCV installs.
+opencv-python-headless

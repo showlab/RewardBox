@@ -1,0 +1,53 @@
+# Captured from the validated isolated Python 3.10.20 / CUDA 12.4 environment.
+# Recreate torch and torchvision first from the official cu124 index, then
+# install this flat exact-version lock.  The native LRM server import preflight
+# passed with CUDA hidden on 2026-08-16.
+accelerate==1.12.0
+av==17.1.0
+blinker==1.9.0
+certifi==2026.7.22
+charset-normalizer==3.5.1
+click==8.4.2
+filelock==3.32.3
+flask==3.1.3
+fsspec==2026.7.0
+hf-xet==1.6.0
+huggingface-hub==0.36.2
+idna==3.18
+itsdangerous==2.2.0
+jinja2==3.1.6
+markupsafe==3.0.3
+mpmath==1.3.0
+networkx==3.4.2
+numpy==2.2.6
+nvidia-cublas-cu12==12.4.2.65
+nvidia-cuda-cupti-cu12==12.4.99
+nvidia-cuda-nvrtc-cu12==12.4.99
+nvidia-cuda-runtime-cu12==12.4.99
+nvidia-cudnn-cu12==9.1.0.70
+nvidia-cufft-cu12==11.2.0.44
+nvidia-curand-cu12==10.3.5.119
+nvidia-cusolver-cu12==11.6.0.99
+nvidia-cusparse-cu12==12.3.0.142
+nvidia-nccl-cu12==2.20.5
+nvidia-nvjitlink-cu12==12.4.99
+nvidia-nvtx-cu12==12.4.99
+packaging==26.3
+peft==0.19.1
+pillow==12.3.0
+psutil==7.2.2
+pyyaml==6.0.3
+qwen-vl-utils==0.0.14
+regex==2026.7.19
+requests==2.34.2
+safetensors==0.8.0
+sympy==1.14.0
+tokenizers==0.22.2
+torch==2.4.1+cu124
+torchvision==0.19.1+cu124
+tqdm==4.70.0
+transformers==4.57.1
+triton==3.0.0
+typing-extensions==4.16.0
+urllib3==2.7.0
+werkzeug==3.1.8

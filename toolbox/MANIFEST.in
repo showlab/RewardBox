@@ -1,0 +1,11 @@
+include README.md LICENSE NOTICE.md AGENTS.md CLAUDE.md CITATION.cff llms.txt
+recursive-include rewardbox *.txt *.json py.typed
+recursive-include calibration *.md *.mp4
+recursive-include datasets *.csv *.jsonl *.mp4
+recursive-include docs *.md *.json
+recursive-include examples *.py *.md
+recursive-include locks *.in *.lock *.txt
+recursive-include scripts *.py *.sh
+recursive-include skills *.md *.py
+recursive-include tests *.py
+global-exclude __pycache__ *.py[cod]

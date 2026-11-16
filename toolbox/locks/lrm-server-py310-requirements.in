@@ -1,0 +1,22 @@
+# Runtime-only environment for
+# Large-Reward-Models@5845ab0f7c3c6a0bef8bd37bf7f07e9533f7ed2f
+# vlm_reward/vlm_reward_server.py.  Keep this isolated from RewardBox's shared
+# Python 3.11 / torch 2.8 environment and from every other model-specific venv.
+#
+# torch/torchvision use the exact CUDA 12.4 recipe documented in the pinned
+# upstream requirements.  Install those two from the PyTorch cu124 index first.
+torch==2.4.1
+torchvision==0.19.1
+transformers==4.57.1
+flask==3.1.3
+numpy==2.2.6
+Pillow==12.3.0
+requests==2.34.2
+qwen-vl-utils==0.0.14
+peft==0.19.1
+safetensors==0.8.0
+
+# RewardBox import-closure repair: the pinned server supplies
+# ``device_map=device`` to Transformers, which requires Accelerate, but the
+# upstream requirements.txt omits it.  No upstream inference logic is patched.
+accelerate==1.12.0

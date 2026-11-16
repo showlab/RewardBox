@@ -1,0 +1,26 @@
+# RewardBox
+
+> One Python interface (`import rewardbox`, CLI `rewardbox`) for 35 configurations of 14 robot reward-model methods (Robometer, RoboReward, TOPReward, Robo-Dopamine, GVL, VLAC, VLAC-Cut, PRIMO-R1, Flora-Rewarder, SOLE-R1, LRM, RynnValue, ProcVLM, Robo-ValueRL). Adapters call each method's official code at a pinned commit, keep raw output scales and the upstream sampling protocol, and share one Trajectory -> RewardOutput contract. Four extra protocol profiles (`vlm-sequence`, `vlm-pair`, `jev-1.14-sequence`, `jev-1.14-pair`) query general VLMs and Jev through HTTP APIs. Released with the paper as RRM-Hub, alongside the RRM-Bench-1K benchmark.
+
+Ask the live registry first: `rewardbox list --json`, `rewardbox info NAME --json`, `rewardbox doctor NAME`, `rewardbox fetch-upstream --list --json`.
+
+## Start here
+- [AGENTS.md](AGENTS.md): rules, model choice, recipes, repository map, I/O contract, troubleshooting for coding agents
+- [../README.md](../README.md): project overview, install, quick start, model zoo, benchmark
+- [README.md](README.md): package README (install and a minimal example)
+- [../benchmark/AGENTS.md](../benchmark/AGENTS.md): rules and commands for evaluating on RRM-Bench-1K
+- [skills/rewardbox/SKILL.md](skills/rewardbox/SKILL.md): drop-in Agent Skill
+
+## Reference
+- [docs/models.md](docs/models.md): generated model table (runtime, default sampling, views, score range, checkouts, calibration)
+- [docs/models.json](docs/models.json): the same, machine-readable
+- [docs/installation.md](docs/installation.md): shared env, isolated workers, model servers, API keys, differences from upstream environments
+- [docs/validation.md](docs/validation.md): what was checked for each adapter with real weights
+- [docs/adding_a_model.md](docs/adding_a_model.md): adapter checklist
+- [docs/guides/general_vlm_and_jev.md](docs/guides/general_vlm_and_jev.md): general VLMs and Jev as evaluators (Sequence / Pair), options, evaluation, relation to the paper's rows
+- [rewardbox/schemas/result-v1.schema.json](rewardbox/schemas/result-v1.schema.json): result file schema
+
+## Optional
+- [NOTICE.md](NOTICE.md): upstream code and weight licenses
+- [docs/guides/vllm_adapters.md](docs/guides/vllm_adapters.md): the opt-in vLLM backends
+- [docs/guides/gvl_gemini_http.md](docs/guides/gvl_gemini_http.md): GVL on Gemini 3.8 Flash with your own Gemini API key or gateway

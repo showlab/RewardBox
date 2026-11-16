@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rewardbox/schemas/result-v1.schema.json",
+  "title": "RewardBox ResultSet v1",
+  "description": "Results of several models on one trajectory (same video + instruction + SamplingSpec + sampled frames). This file is the public, independently auditable description of the format; _validate_payload() in rewardbox/core/results.py is the lightweight equivalent check at runtime (jsonschema is not a runtime dependency). Inputs are trusted fixed files: comparability is decided by protocol fields, no content is hashed.",
+  "type": "object",
+  "required": [
+    "schema_version", "video", "instruction", "sampling", "created_at",
+    "rewardbox_version", "environment", "results", "errors"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "video": { "type": "string" },
+    "instruction": { "type": "string", "minLength": 1 },
+    "sampling": {
+      "type": "object",
+      "description": "The requested protocol (spec) is recorded separately from the input frame grid actually fed to every model (input_frame_indices); the subset on which each model reported values is results[*].frame_indices.",
+      "required": ["spec", "key", "input_frame_indices"],
+      "properties": {
+        "spec": {
+          "type": "object",
+          "required": ["num_frames", "strategy", "fps", "interval", "resize", "include_last", "key"],
+          "properties": {
+            "num_frames": { "type": "integer", "minimum": 1 },
+            "strategy": { "enum": ["uniform", "uniform_floor", "all", "fps", "interval"] },
+            "fps": { "type": ["number", "null"] },
+            "interval": { "type": ["integer", "null"] },
+            "resize": {
+              "type": ["array", "null"],
+              "items": { "type": "integer" },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "include_last": { "type": "boolean" },
+            "key": { "type": "string", "pattern": "^[a-z_]+:n=[0-9]+:fps=[^:]+:interval=[^:]+:resize=[^:]+:last=[01]$" }
+          }
+        },
+        "key": { "type": "string", "pattern": "^[a-z_]+:n=[0-9]+:fps=[^:]+:interval=[^:]+:resize=[^:]+:last=[01]$" },
+        "input_frame_indices": {
+          "type": ["array", "null"],
+          "description": "null only when results is empty (no model ever read the video).",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "created_at": { "type": "string" },
+    "rewardbox_version": { "type": "string" },
+    "environment": {
+      "type": "object",
+      "required": ["python", "torch", "transformers", "gpu"],
+      "properties": {
+        "python": { "type": ["string", "null"] },
+        "torch": { "type": ["string", "null"] },
+        "transformers": { "type": ["string", "null"] },
+        "gpu": { "type": ["string", "null"] }
+      }
+    },
+    "results": {
+      "type": "object",
+      "description": "Each key must equal the inner model field (guards against hand edits that misalign key and model).",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["model", "normalize", "progress", "frame_indices",
+                     "weights", "success", "raw", "cost", "meta"],
+        "properties": {
+          "model": { "type": "string" },
+          "normalize": { "enum": ["none", "minmax", "zscore", "rank"] },
+          "progress": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "number" },
+            "description": "Raw scale; same length as frame_indices, finite values only (no NaN/Inf)."
+          },
+          "frame_indices": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "integer", "minimum": 0 },
+            "description": "Frames on which this model actually reported a value, strictly increasing; a subset of sampling.input_frame_indices, not the same thing."
+          },
+          "weights": { "type": ["array", "null"] },
+          "success": { "type": ["array", "null"] },
+          "raw": { "type": "object" },
+          "cost": { "type": ["object", "null"] },
+          "meta": { "type": "object" }
+        }
+      }
+    },
+    "errors": {
+      "type": "object",
+      "description": "model_name -> failure reason; a failed model does not appear in results.",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    }
+  }
+}

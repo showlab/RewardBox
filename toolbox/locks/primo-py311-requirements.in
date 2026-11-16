@@ -1,0 +1,21 @@
+# PRIMO-R1 inference only. Training dependencies stay outside RewardBox.
+# Install the two vendored packages last; do not install PyPI transformers over them.
+torch==2.5.1
+torchvision==0.20.1
+vllm==0.7.2
+numpy<2
+opencv-python-headless>=4.8,<4.12
+Pillow>=10,<12
+decord==0.6.0
+# This release has a prebuilt Linux wheel; newer 14.x can require FFmpeg headers.
+av==13.1.0
+huggingface-hub>=0.26,<1
+pytest>=7.4
+scipy>=1.9
+pyyaml>=6
+rich>=13
+setuptools<81
+wheel
+# Paths below are relative to the RewardBox repository root.
+-e ./reward_model_code/PRIMO-R1/src/qwen-vl-utils
+-e ./reward_model_code/PRIMO-R1/transformers-main

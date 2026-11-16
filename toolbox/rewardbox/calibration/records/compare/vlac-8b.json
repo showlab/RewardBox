@@ -1,0 +1,25 @@
+{
+  "model": "vlac-8b",
+  "video_a": "calibration/synthetic_pick.mp4",
+  "video_b": "calibration/synthetic_pick_fail.mp4",
+  "instruction": "move the red block onto the green target",
+  "sampling": {
+    "num_frames": 64,
+    "strategy": "uniform",
+    "fps": null,
+    "interval": null,
+    "resize": null,
+    "include_last": true,
+    "key": "uniform:n=64:fps=-:interval=-:resize=-:last=1"
+  },
+  "environment": {
+    "python": "3.10.12",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA H200 NVL",
+    "transformers": "4.51.3"
+  },
+  "output": {
+    "compare_a_vs_b": 95.4,
+    "compare_b_vs_a": -94.5
+  }
+}

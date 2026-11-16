@@ -1,0 +1,107 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rewardbox"
+dynamic = ["version"]
+description = "One interface for robot reward models: official-code adapters, a shared I/O contract, and benchmark metrics"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE.md"]
+authors = [{ name = "RewardBox contributors" }]
+keywords = ["robotics", "reward model", "progress estimation", "vision-language model", "benchmark"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+
+# Core dependencies must stay light: `rewardbox.list_models()` / `rewardbox info`
+# run without torch (tests/test_core.py::test_list_models_does_not_load_heavy).
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "opencv-python-headless>=4.7",
+    "Pillow>=9.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.64",
+    "rich>=13.0",
+    "packaging>=23.0",
+]
+
+[project.optional-dependencies]
+# Coarse ranges for in-process models (TOPReward, RoboReward, Robometer, Robo-Dopamine).
+# Reproducible installs use locks/shared-py311-linux-x86_64.lock (see docs/installation.md).
+models = [
+    "torch>=2.8",
+    "torchvision>=0.23",
+    "transformers>=4.57,<4.58",
+    "qwen-vl-utils>=0.0.14",
+    "accelerate",
+]
+vllm = ["vllm>=0.11,<0.12"]
+# HTTP-only clients: the official model servers run in their own pinned environments.
+sole-r1-client = [
+    # Agentlace itself is installed in a second --no-deps step (locks/sole-r1-client-no-deps.txt):
+    # its metadata would pull GUI opencv-python over opencv-python-headless.
+    "lz4>=4.3",
+    "pyzmq>=25",
+    "matplotlib>=3.7",
+    "Pillow>=9",
+    "opencv-python-headless>=4.7",
+]
+lrm-client = ["requests>=2"]
+rynnvalue-client = ["requests>=2"]
+robovaluerl-client = ["requests>=2"]
+procvlm-client = ["requests>=2"]
+gvl = ["requests>=2.32.4"]
+general-vlm = ["requests>=2.32.4"]          # vlm-sequence / vlm-pair / jev-1.14-*: plain HTTP
+dev = ["pytest>=7.4", "pytest-cov", "ruff>=0.6", "build"]
+
+[project.urls]
+Repository = "https://github.com/showlab/RewardBox"
+Documentation = "https://github.com/showlab/RewardBox#readme"
+
+[project.scripts]
+rewardbox = "rewardbox.cli.main:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "rewardbox.version.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["rewardbox*"]
+
+[tool.setuptools.package-data]
+rewardbox = [
+    "py.typed",
+    "prompts/*.txt",
+    "schemas/*.json",
+    "calibration/records/*.json",
+    "calibration/records/*/*.json",
+    "calibration/records/*/*/*.json",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "gpu: needs a GPU",
+    "calibration: compares against recorded upstream outputs",
+    "slow: takes more than 30s",
+    "upstream(*keys): needs the pinned official checkout(s); skipped when absent",
+]
