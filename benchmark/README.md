@@ -93,11 +93,19 @@ tools/
 metadata.json                  counts, suites, sources
 ```
 
-The videos are not in the git repository. The benchmark data will be hosted on
-Hugging Face (the link will be added at release); put its `episodes/` tree in
-this directory so that the manifest paths resolve. The labels, manifests, frame
-maps and tools kept here are enough to read the format and to score saved
-predictions.
+The videos are in the Hugging Face dataset
+[Ethanliang99/RRM-Bench-1K](https://huggingface.co/datasets/Ethanliang99/RRM-Bench-1K), which holds this directory together with
+its `episodes/` tree; the RewardBox git repository does not include them. In a
+RewardBox checkout, download them into this directory so that the manifest paths
+resolve:
+
+```bash
+huggingface-cli download Ethanliang99/RRM-Bench-1K --repo-type dataset \
+    --include "episodes/*" --local-dir benchmark    # from the repository root
+```
+
+The labels, manifests, frame maps and tools kept here are enough to read the
+format and to score saved predictions.
 
 `inputs/*.jsonl` are RewardBox manifests: `rewardbox bench --manifest
 inputs/single_view.jsonl ...` runs any registered model on them directly (paths

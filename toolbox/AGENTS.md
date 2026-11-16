@@ -177,8 +177,7 @@ benchmark's own evaluator (recipe 6), whose definitions differ in detail
 ### 6. Evaluate on RRM-Bench-1K
 
 `../benchmark/` holds the RRM-Bench-1K manifests, labels and the official evaluator;
-its own `AGENTS.md` has the rules. The videos are not in git (the benchmark data
-will be hosted on Hugging Face; ask the user where a local copy is): without them
+its own `AGENTS.md` has the rules. The videos are not in git (they are in the Hugging Face dataset Ethanliang99/RRM-Bench-1K; from the repository root, `huggingface-cli download Ethanliang99/RRM-Bench-1K --repo-type dataset --include "episodes/*" --local-dir benchmark`): without them
 `bench` stops with `video file of entry ... does not exist`, while the evaluator
 and its tests work on saved predictions. The protocol scores 1 FPS transitions,
 which is RewardBox `SamplingSpec(strategy="fps", fps=1.0, include_last=False)`:

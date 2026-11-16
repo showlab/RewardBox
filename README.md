@@ -5,6 +5,7 @@
 #### **One interface for robot reward models.**
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://ethanliang99.github.io/awesome-robot-reward-model)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-RRM--Bench--1K-yellow)](https://huggingface.co/datasets/Ethanliang99/RRM-Bench-1K)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green)](LICENSE)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 [![Citation](https://img.shields.io/badge/Citation-bibtex-green)](#bookmark_tabs-citation)
@@ -179,9 +180,11 @@ where an evaluator fails: (A) Action–Effect, (B) Semantic/Ordered Constraint,
 (C) Persistence/Reversal and (D) Visibility.
 
 > [!NOTE]
-> The benchmark data will be hosted on Hugging Face; the link will be added here
-> when it is released. [`benchmark/`](benchmark) in this repository holds the
-> official evaluator and, for reference, the manifests and labels it reads.
+> The benchmark videos are on Hugging Face:
+> [Ethanliang99/RRM-Bench-1K](https://huggingface.co/datasets/Ethanliang99/RRM-Bench-1K). [`benchmark/`](benchmark) in this
+> repository holds the official evaluator and, for reference, the manifests and
+> labels it reads; download the videos into it with
+> `huggingface-cli download Ethanliang99/RRM-Bench-1K --repo-type dataset --include "episodes/*" --local-dir benchmark`.
 
 ```bash
 B=../benchmark      # from toolbox/

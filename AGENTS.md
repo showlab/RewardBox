@@ -38,9 +38,7 @@ in `benchmark/AGENTS.md` assume `benchmark/`.
 
 ## Not in this repository
 
-- **Benchmark videos** (`benchmark/episodes/**/videos/*.mp4`, about 3.9 GB): the
-  benchmark data will be hosted on Hugging Face and is not published yet; ask the
-  user where a local copy is. Labels, manifests and frame maps are here, so the
+- **Benchmark videos** (`benchmark/episodes/**/videos/*.mp4`, about 3.9 GB): they are in the Hugging Face dataset Ethanliang99/RRM-Bench-1K; from the repository root, download them with `huggingface-cli download Ethanliang99/RRM-Bench-1K --repo-type dataset --include "episodes/*" --local-dir benchmark`. Labels, manifests and frame maps are here, so the
   evaluator and its tests run without the videos; running a model on the
   benchmark does not.
 - **Upstream source checkouts**: fetched at pinned commits by

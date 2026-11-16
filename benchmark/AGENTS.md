@@ -12,9 +12,7 @@ Commands assume this directory is the working directory.
 - `inputs/events.jsonl`: the event marks behind the labels (clip, time, English
   description). For reading the labels only: no metric uses it, and it is never
   part of a model's input.
-- **The videos (`episodes/*/*/videos/*.mp4`) are not in git.** The benchmark data
-  will be hosted on Hugging Face and is not published yet; ask the user where a
-  local copy is. Scoring saved predictions and `tools/test_evaluate.py` work
+- **The videos (`episodes/*/*/videos/*.mp4`) are not in git.** They are in the Hugging Face dataset Ethanliang99/RRM-Bench-1K; from the repository root, download them with `huggingface-cli download Ethanliang99/RRM-Bench-1K --repo-type dataset --include "episodes/*" --local-dir benchmark`. Scoring saved predictions and `tools/test_evaluate.py` work
   without the videos; running a model does not (`video file of entry ... does not
   exist`). Put the `episodes/` tree here so the manifest paths resolve.
 - `rewardbox` is the package in `../toolbox` (`pip install -e ../toolbox`).
