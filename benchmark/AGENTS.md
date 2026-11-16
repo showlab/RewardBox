@@ -25,10 +25,10 @@ Commands assume this directory is the working directory.
 - Score only with `tools/evaluate.py`. Report `n` and `missing` with every number,
   say whether `--mode interpolate` (†) was used, and name the exact model
   configuration and sampling.
-- Compare against the paper's tables, always together with the always-rising
-  (Macro-F1 0.474) and time-only (VOC 1.000) references. Per-suite numbers come
+- Compare against the paper's tables, always together with the always-rising and time-only
+  references. Per-suite numbers come
   with the always-rising Macro-F1 on the same transitions; (A) Action–Effect is
-  scored on its 86 effect-showing videos.
+  scored on its effect-showing videos.
 - Aggregate or resample by execution (`group_id`), never treat the 1,117 videos as
   independent executions.
 - The ‡ multiview rows and the § LRM-8B (Contrastive) row of the paper's Table II

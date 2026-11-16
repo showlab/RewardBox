@@ -4,36 +4,25 @@ A benchmark for **robot reward / progress models on real robot executions**,
 labelled with how far the *task state* has progressed, not how much time has
 passed. It is released together with the [RewardBox](https://github.com/showlab/RewardBox) toolbox (RRM-Hub).
 
-- **1,117 single-view videos** (plus 205 synchronized three-camera inputs) from
-  **425 clips** of **198 real-robot policy executions** across 52 tasks on five
-  robot embodiments: ARX-5, UR5 and Franka (single-arm), Cobot Magic ALOHA and
-  DOS-W1 (dual-arm). The executions are closed-loop runs of learned policies
-  recorded on RoboChallenge Table30 and Table30 V2.
+- **1,117 single-view videos** of real-robot policy executions across 52 tasks
+  on five robot embodiments: ARX-5, UR5 and Franka (single-arm), Cobot Magic
+  ALOHA and DOS-W1 (dual-arm). The executions are closed-loop runs of learned
+  policies recorded on RoboChallenge Table30 and Table30 V2. Clips with three
+  synchronized cameras also come as three-camera inputs.
 - **Task-state labels**: a per-clip progress curve compiled from human event marks
   over each task's rubric. Credit rises as effects are achieved and
   falls when progress is lost: a failed attempt, a dropped or misplaced object, or
   an achieved state that is undone.
-- **17,381 non-flat 1 FPS transitions** (15,679 rising, 1,702 falling) on which
-  direction metrics are computed, plus trajectory-level ranking metrics.
+- **Direction metrics** on the non-flat 1 FPS transitions of the task-state
+  curves, plus trajectory-level ranking metrics.
 - **Four contrast suites** that probe where evaluators fail: (A) Action–Effect,
   (B) Semantic/Ordered Constraint, (C) Persistence/Reversal and (D) Visibility
   (each reduced-evidence video is paired with a sufficient view of the same clip,
   under identical labels), with success and failure controls.
 
-## At a glance
+## Terms
 
-| | count |
-|---|---:|
-| tasks (49 task names; three exist in both Table30 and Table30 V2) | 52 |
-| executions (`episode_uid`) | 198 |
-| clips (`main` 201, `unit_split` 107, `unit_window` 84, `object_split` 33) | 425 |
-| single-view videos (fixed cameras 586, wrist cameras 531) | 1,117 |
-| three-camera inputs (`primary` + `left_wrist` + `right_wrist`) | 205 |
-| frames (30 fps) | 592,640 |
-| clip length | 2.6–109 s, median 14.5 s |
-| videos by endpoint grade: full / partial / zero fulfillment (`quality`: successful / suboptimal / failure) | 665 / 259 / 193 |
-
-**Terms.** The paper describes the data as tasks, executions, videos and scope
+The paper describes the data as tasks, executions, videos and scope
 variants; the files add the clip and keep "episode" in field names.
 
 - An *execution* is one attempt of a policy at a task (`episode_uid`, `group_id`).
@@ -49,40 +38,40 @@ execution, not by video.
 
 ## Suites
 
-Suites overlap (a video can be in several); totals count each video once. The
-slugs are the `categories` values of the label files.
+Suites overlap (a video can be in several). The slugs are the `categories`
+values of the label files.
 
-| slug | paper | what it tests | videos | clips | executions |
-|---|---|---|---:|---:|---:|
-| `action_effect` | (A) Action–Effect | the motion looks like success but the effect is absent | 159 | 55 | 48 |
-| `semantic_ordered` | (B) Semantic/Ordered Constraint | right object, right destination, right order | 290 | 98 | 59 |
-| `persistence_reversal` | (C) Persistence/Reversal | achieved states that are later lost or undone | 467 | 185 | 59 |
-| `occlusion_viewpoint` | (D) Visibility | the camera gives partial or insufficient evidence of the task state | 394 | 297 | 159 |
-| `control` | controls | clean successes (170 videos) and obvious failures (12) | 182 | 78 | 28 |
-| `no_task_view` | stress condition | a camera that shows no task evidence | 22 | 22 | 10 |
+| slug | paper | what it tests |
+|---|---|---|
+| `action_effect` | (A) Action–Effect | the motion looks like success but the effect is absent |
+| `semantic_ordered` | (B) Semantic/Ordered Constraint | right object, right destination, right order |
+| `persistence_reversal` | (C) Persistence/Reversal | achieved states that are later lost or undone |
+| `occlusion_viewpoint` | (D) Visibility | the camera gives partial or insufficient evidence of the task state |
+| `control` | controls | clean successes and obvious failures |
+| `no_task_view` | stress condition | a camera that shows no task evidence |
 
 `action_effect` is assigned per execution: a clip belongs to it when the robot
 completes a success-like motion whose effect is absent and one camera shows that
-absence. The suite is scored on the 86 videos of its clips whose camera shows the
-effect (`action_effect_scored`); the other 73 videos give partial or insufficient
+absence. The suite is scored on the videos of its clips whose camera shows the
+effect (`action_effect_scored`); its other videos give partial or insufficient
 evidence and are scored under `occlusion_viewpoint`.
 
 `occlusion_viewpoint` contains every view labelled `P` (partial evidence) or `X`
 (insufficient evidence; excluding no-task `X` views), plus the `V` views of clips
 whose suite is visibility-abstention. Each such video has a `result_case_id`:
 another camera of the same clip labelled `V` (sufficient evidence) with the
-identical GT curve. 11 clips (33 videos) have no single camera that shows everything
-(`result_view: "none"`).
+identical GT curve. A clip with no single camera that shows everything has
+`result_view: "none"`.
 
 ## Files
 
 ```
 inputs/
-  single_view.jsonl            1,117 model inputs: id, video (relative), instruction, split (= condition), group_id
-  multiview.jsonl              205 three-camera inputs, one per clip (video = {primary, left_wrist, right_wrist})
+  single_view.jsonl            model inputs: id, video (relative), instruction, split (= condition), group_id
+  multiview.jsonl              three-camera inputs, one per clip (video = {primary, left_wrist, right_wrist})
   ground_truth.json            official labels per single-view id (fields below)
   multiview_ground_truth.json  official labels per multiview id
-  events.jsonl                 1,799 event marks behind the labels: clip, time, English description (fields below)
+  events.jsonl                 event marks behind the labels: clip, time, English description (fields below)
   eval_grid_1fps.json          the 1 FPS evaluation frames of every id
 episodes/<task>/<clip>/
   videos/*.mp4                 one file per camera (30 fps)
@@ -120,10 +109,10 @@ resolve relative to the manifest file). RewardBox is the package in
 | `gt_fraction`, `gt_total`, `max_score` | endpoint of the curve and the rubric points behind it |
 | `quality` | endpoint grade: `successful` (endpoint 1, full fulfillment in the paper), `suboptimal` (between, partial), `failure` (0, zero); used by the ranking metrics |
 | `categories` | suite slugs above; select suites by this field |
-| `human_suite` | the finer annotation-time suite of the execution, kept for reference. It predates the per-execution assignment of (A) Action–Effect (136 of the 159 `action_effect` videos carry it) |
-| `action_effect_scored` | this video is one of the 86 on which (A) Action–Effect is scored |
-| `view`, `camera`, `view_label` | camera file, `fixed`/`wrist`, `V`/`P`/`X` (sufficient / partial / insufficient evidence for judging the task; 715 / 374 / 28 videos) |
-| `main_camera` | the one camera per whole-execution (`main`) clip used by the 201-video ranking scope |
+| `human_suite` | the finer annotation-time suite of the execution, kept for reference. It predates the per-execution assignment of (A) Action–Effect |
+| `action_effect_scored` | (A) Action–Effect is scored on this video |
+| `view`, `camera`, `view_label` | camera file, `fixed`/`wrist`, `V`/`P`/`X` (sufficient / partial / insufficient evidence for judging the task) |
+| `main_camera` | the one camera per whole-execution (`main`) clip used by the main-clip ranking scope |
 | `no_task_view` | the camera shows no task-relevant motion |
 | `result_view`, `result_case_id` | the paired `V` camera of the same clip (identical GT), or `none` |
 | `clip_id`, `episode_uid`, `group_id`, `task`, `condition` | identity and grouping |
@@ -141,13 +130,13 @@ No metric uses them, and they must not be given to a model as input.
 |---|---|
 | `clip_id` | the clip, as in `ground_truth.json`; all cameras of a clip share its events |
 | `event_id` | id of the mark. One physical event keeps its id in every scope variant that contains it |
-| `time_sec` | `[start, end]` in the clip's video seconds, the clock of `curve`; the two are equal for an instant mark (1,313 events) |
+| `time_sec` | `[start, end]` in the clip's video seconds, the clock of `curve`; the two are equal for an instant mark |
 | `description_en` | what happens, at most 12 words |
-| `source` | `annotator`: rendered from the annotator's sentence (1,366); `frames`: the mark had no sentence, so the text was written from the task unit and the frames (433) |
+| `source` | `annotator`: rendered from the annotator's sentence; `frames`: the mark had no sentence, so the text was written from the task unit and the frames |
 
 Reading notes:
 
-- 423 of the 425 clips have events. Two zero-progress clips have none.
+- Every clip has events except two zero-progress clips.
 - **Times.** A completion (a pick, a place, another achieved step) is timed when
   its outcome is confirmed, which can be 1–2 s after the object leaves the table
   or the gripper, and not at that instant. A failed attempt is timed at its closest
@@ -185,15 +174,15 @@ evaluator that compares observation pairs may instead judge each transition
 directly. All
 transitions are pooled; report Rising and Falling precision/recall/F1,
 **Macro-F1** (mean of the two F1) and accuracy. Transitions without a prediction
-are excluded from P/R/F1 and reported as `missing`. With 90.2% of transitions
-rising, an always-rising predictor reaches Macro-F1 0.474; the falling class is
-where evaluators separate. Curves whose native points do not cover the grid can
+are excluded from P/R/F1 and reported as `missing`. Because most transitions
+rise, an always-rising predictor already reaches a moderate Macro-F1; the falling
+class is where evaluators separate. Curves whose native points do not cover the grid can
 be read with `--mode interpolate` (linear, inside the native range only); such
 rows are marked † and are not native 1 FPS predictions.
 
 **By suite and paired evidence.** The same metrics per suite and for the two
 control groups (`control_clean_success`, `control_obvious_failure`), each next to
-the always-rising Macro-F1 on the same transitions. (A) Action–Effect uses its 86
+the always-rising Macro-F1 on the same transitions. (A) Action–Effect uses its
 effect-showing videos; the other suites use every member video. For (D)
 Visibility, each P/X video is also compared with its paired V view on identical GT
 transitions, with a 95% bootstrap CI over episodes (2,000 resamples, seed
@@ -206,7 +195,8 @@ predicted value, failure < suboptimal < successful, within each task (ties 0),
 averaged over tasks; Succ–Fail Diff = mean last value of successful minus failure
 videos within each task, averaged over tasks (raw units; a fraction for
 percent/fraction outputs; an extra of this evaluator, not reported in the paper).
-Reported on all 1,117 single views and on one main camera per main clip (201). Note that a time-only reference reaches VOC 1.000:
+Reported on all single views and on one main camera per main clip. A time-only
+reference reaches a perfect VOC:
 VOC on successful trajectories measures temporal order, not task state.
 
 ## Evaluate a model
@@ -277,8 +267,8 @@ Two kinds of rows use inputs that this release does not include:
 - **‡ Multiview rows** (Robo-ValueRL and the "Multiview" rows of Robo-Dopamine,
   SOLE-R1 and Flora-Rewarder). The paper places each video's camera in the
   primary slot and the other cameras of its execution in the remaining slots,
-  for 1,116 videos. `inputs/multiview.jsonl` holds the 205 clips with three
-  synchronized cameras, one input per clip, which the paper uses for the
+  for every video whose execution has more than one camera.
+  `inputs/multiview.jsonl` holds the clips with three synchronized cameras, one input per clip, which the paper uses for the
   three-view queries of the general-purpose VLMs and Jev.
 - **§ LRM-8B (Contrastive)** is scored in the paper on adjacent source frames,
   not on the 1 FPS grid that `tools/evaluate.py` scores.
@@ -288,8 +278,8 @@ Two kinds of rows use inputs that this release does not include:
 Results of the evaluators studied with this benchmark are reported in the paper
 and on the [project page](https://ethanliang99.github.io/awesome-robot-reward-model).
 Read every number next to the two analytic references that need no model: an
-always-rising predictor (Macro-F1 0.474, falling F1 0) and normalized elapsed time
-(VOC 1.000, Kendall τ_a 0). Coverage can differ between evaluators (`n` and
+always-rising predictor, which never predicts a fall, and normalized elapsed time,
+which reaches a perfect VOC but does not rank endpoints. Coverage can differ between evaluators (`n` and
 `missing`); never rank rows on different supports without reading them.
 
 `tools/evaluate.py` reproduces the paper's direction, ranking and per-suite tables

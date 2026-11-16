@@ -192,8 +192,8 @@ python $B/tools/evaluate.py --predictions runs/robometer-4b/robometer-4b.json \
 
 A model that must keep its native protocol (fixed frame count, prefixes): run
 `bench` with that protocol and add `--mode interpolate` (reported as †). Compare
-with the paper's tables, always next to the always-rising (Macro-F1 0.474) and
-time-only (VOC 1.000) references, and report `n`/`missing`.
+with the paper's tables, always next to the always-rising and
+time-only references, and report `n`/`missing`.
 Benchmark VOC is a per-trajectory Pearson r on successful videos, unlike
 `rewardbox.metrics.voc` (Spearman).
 

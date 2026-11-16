@@ -154,8 +154,7 @@ parsing and evaluator as the study. A run through them is a new API run, not a
 reproduction of the paper's rows: state the date and the settings when numbers
 are compared with the paper. One input case differs:
 
-- **Jev on long three-camera inputs.** Seven of the 205 three-camera clips
-  exceeded the service's input limit in the study and were scored from a
+- **Jev on long three-camera inputs.** A few three-camera clips exceeded the service's input limit in the study and were scored from a
   three-view mosaic. That fallback is not implemented; those clips fail here.
 
 Provider-side model versions are not pinned by a model id; record the date and
