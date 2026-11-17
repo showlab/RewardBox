@@ -16,7 +16,7 @@
 
 Give RewardBox a robot video and a task instruction, and get back the reward that a published model assigns.
 
-RewardBox is the toolbox (RRM-Hub) of the survey *Robotic Reward Models in the Foundation-Model Era: A Survey and Capability Benchmark*. It runs the official implementation of 14 reward-model methods through one Python and command-line interface, and it evaluates any of them on the paper's benchmark, RRM-Bench-1K.
+RewardBox is the toolbox (RRM-Hub) of the survey [*Robotic Reward Models in the Foundation-Model Era*](https://arxiv.org/abs/2611.20741). It runs the official implementation of 14 reward-model methods through one Python and command-line interface, and it evaluates any of them on the paper's benchmark, RRM-Bench-1K.
 
 ```python
 import rewardbox
@@ -243,11 +243,13 @@ redistributing anything. The RRM-Bench-1K data follows RoboChallenge's license,
 
 ```bibtex
 @article{liang2026rrm,
-  title   = {Robotic Reward Models in the Foundation-Model Era: A Survey and Capability Benchmark},
-  author  = {Liang, Guoqiang and Lin, Yiqi and Zhou, Shangchen and Zeng, Wenzheng and
-             Chen, Yanzhe and Bai, Zechen and Shou, Mike Zheng},
+  title   = {Robotic Reward Models in the Foundation-Model Era},
+  author  = {Liang, Guoqiang and Lin, Yiqi and Zhou, Shangchen and
+             Zeng, Wenzheng and Chen, Yanzhe and Bai, Zechen and
+             Shou, Mike Zheng},
+  journal = {arXiv preprint arXiv:2611.20741},
   year    = {2026},
-  note    = {Project page: https://ethanliang99.github.io/awesome-robot-reward-model}
+  url     = {https://arxiv.org/abs/2611.20741}
 }
 ```
 

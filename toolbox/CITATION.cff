@@ -21,9 +21,10 @@ authors:
     given-names: Mike Zheng
 preferred-citation:
   type: article
-  title: "Robotic Reward Models in the Foundation-Model Era: A Survey and Capability Benchmark"
+  title: "Robotic Reward Models in the Foundation-Model Era"
+  journal: "arXiv preprint arXiv:2611.20741"
   year: 2026
-  url: "https://ethanliang99.github.io/awesome-robot-reward-model"
+  url: "https://arxiv.org/abs/2611.20741"
   authors:
     - family-names: Liang
       given-names: Guoqiang
